@@ -3,7 +3,6 @@ import CategoryList from "./CategoryList";
 import Navi from "./Navi";
 import ProductList from "./ProductList";
 import { Container, Row, Col } from "reactstrap";
-
 export default class App extends Component {
   state = { currentCategory: "", products: [], cart:[] };
 
