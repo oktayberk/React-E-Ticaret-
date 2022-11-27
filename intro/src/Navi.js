@@ -12,7 +12,6 @@ import{
     DropdownMenu,
     DropdownItem
 } from "reactstrap";
-
 export default class Navi extends React.Component {
     constructor(props){
         super(props);
@@ -37,6 +36,8 @@ export default class Navi extends React.Component {
                     <NavItem>
                         <NavLink href="/components/" >Components</NavLink>
                     </NavItem>
+
+
                     <NavItem>
                         <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
                     </NavItem>
