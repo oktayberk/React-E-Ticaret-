@@ -3,7 +3,6 @@ import { Table,Button } from "reactstrap"; //3.button reactstrapten geldigi içi
 
 export default class ProductList extends Component {
    
-
   render() {
     return (
       <div>
