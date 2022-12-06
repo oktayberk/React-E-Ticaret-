@@ -3,6 +3,7 @@ import { Table,Button } from "reactstrap"; //3.button reactstrapten geldigi içi
 
 export default class ProductList extends Component {
    
+
   render() {
     return (
       <div>
@@ -28,7 +29,7 @@ export default class ProductList extends Component {
                 <td>{product.unitPrice}</td>
                 <td>{product.quantityPerUnit}</td>
                 <td>{product.unitsInStock}</td>
-                <td><Button onClick={()=>this.props.addToCart(product)} color="info" >Add</Button> </td> {/* 2 butonu ekliyoruz */}
+                <td><Button onClick={()=>this.props.addToCart(product)} color="info" >Add</Button> </td> {/* 2 butonu ekliyoruz!!!6-this.props diyerek add to cart ı eklıyoruz */}
               </tr>
             ))}
           </tbody>
