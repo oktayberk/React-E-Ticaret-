@@ -3,6 +3,7 @@ import CategoryList from "./CategoryList";
 import Navi from "./Navi";
 import ProductList from "./ProductList";
 import { Container, Row, Col } from "reactstrap";
+import alertify from "alertifyjs";
 
 export default class App extends Component {
   state = { currentCategory: "", products: [], cart:[] }; //5cart sepet demek statede bir cart olusturuyoruz
@@ -34,7 +35,14 @@ export default class App extends Component {
       newCart.push({product:product,quantity:1}); //4newcart arrayıne yeni bir eleman ekledik push ile 
     }
     this.setState({cart:newCart});//4statei de bu şekilde set ettik
-}
+    alertify.success(product.productName+"added to cart");
+
+  }
+
+  removeFromCart=(product)=>{
+    let newCart=this.state.cart.filter(c=>c.product.id!==product.id) 
+    this.setState({cart:newCart})
+  }
 
   render() {
     let productInfo = { title: "Product List" };
@@ -42,7 +50,7 @@ export default class App extends Component {
     return (
       <div>
         <Container>
-          <Navi cart={this.state.cart} /> {/* 7-olusan cartı naviye bu şekilde gonderiyoruz ve this.statedeki cart oldugunu soyluyoruz. Yani o degiştikce navinin yanında yazacak */}
+          <Navi removeFromCart={this.removeFromCart} cart={this.state.cart} /> {/* 7-olusan cartı naviye bu şekilde gonderiyoruz ve this.statedeki cart oldugunu soyluyoruz. Yani o degiştikce navinin yanında yazacak */}
           <Row>
             <Col xs="3">
               <CategoryList
