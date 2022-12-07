@@ -1,42 +1,47 @@
 import React, { Component } from "react";
-import { ListGroup, ListGroupItem } from "reactstrap";
+import {
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Badge,
+  NavItem,
+  NavLink
+} from "reactstrap";
 
-export default class CategoryList extends Component {
-  state = {
-    categories: [],
-  };
+export default class CartSummary extends Component {
+  renderSummary() {
+    return (
+      <UncontrolledDropdown nav inNavbar>
+        <DropdownToggle nav caret>
+          Your Cart -{this.props.cart.length}
+        </DropdownToggle>
+        <DropdownMenu right>
+          {this.props.cart.map((cartItem) => (
+            <DropdownItem key={cartItem.product.id}>
+              <Badge color="danger" onClick={()=>this.props.removeFromCart(cartItem.product)}>X</Badge>
+              {cartItem.product.productName}
+              <Badge color="success">{cartItem.quantity} </Badge>
+            </DropdownItem>
+          ))}
 
-  componentDidMount() {
-    this.getCategories();
+          <DropdownItem divider />
+          <DropdownItem>Reset</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    );
   }
 
-  getCategories = () => {
-    fetch("http://localhost:3000/categories")
-      .then((response) => response.json())
-      .then((data) => this.setState({ categories: data }));
-  };
+  renderEmptyCart(){
+    return(
+    <NavItem>
+      <NavLink>Empty Cart</NavLink>
+    </NavItem>)
+  }
 
   render() {
-    return (
-      <div>
-        <h3>{this.props.info.title}</h3>
-        <ListGroup>
-          {this.state.categories.map((category) => (
-            <ListGroupItem
-              active={
-                category.categoryName === this.props.currentCategory
-                  ? true
-                  : false
-              }
-              onClick={() => this.props.changeCategory(category)}
-              key={category.id}
-            >
-              {category.categoryName}
-            </ListGroupItem>
-          ))}
-        </ListGroup>
-        {/* <h4>{this.props.currentCategory}</h4>{" "} */}
-      </div>
-    );
+    return <div>
+      {this.props.cart.length>0?this.renderSummary():this.renderEmptyCart() }
+    </div>;
   }
 }
